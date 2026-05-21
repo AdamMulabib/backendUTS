@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id String @id @default(cuid())
+  name String @unique
+  description String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  events Event[]
+
+  @@map("categories")
+}
+
+model Event {
+  id String @id @default(cuid())
+  name String
+  categoryId String @map("category_id")
+  location String
+  dateEvent DateTime
+  description String @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  category Category @relation(fields: [categoryId], references: [id])
+  speakers EventPembicara[]
+
+  @@map("events")
+}
+
+model Pembicara {
+  id String @id @default(cuid())
+  name String
+  bio String? @db.Text
+  image String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  events EventPembicara[]
+
+  @@map("pembicaras")
+}
+
+model EventPembicara {
+  eventId String @map("event_id")
+  pembicaraId String @map("pembicara_id")
+
+  event Event @relation(fields: [eventId], references: [id])
+  pembicara Pembicara @relation(fields: [pembicaraId], references: [id])
+
+  @@id([eventId, pembicaraId])
+  @@map("event_pembicaras")
+}
