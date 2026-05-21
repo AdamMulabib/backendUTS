@@ -2,11 +2,11 @@
   "name": "backend-invofest",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc && npx prisma generate",
-    "start": "node dist/index.js",
+    "build": "npx prisma generate",
+    "start": "tsx src/index.ts",
     "postinstall": "npx prisma generate"
   },
   "type": "module",
@@ -17,14 +17,14 @@
     "@prisma/client": "^6.19.3",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "prisma": "^6.19.3"
+    "prisma": "^6.19.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.6.0",
-    "dotenv": "^17.4.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.2"
+    "dotenv": "^17.4.2"
   }
 }
