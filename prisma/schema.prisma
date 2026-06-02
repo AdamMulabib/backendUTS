@@ -65,3 +65,14 @@ model EventPembicara {
   @@id([eventId, pembicaraId])
   @@map("event_pembicaras")
 }
+
+model Users {
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  password   String
+  foto       String
+
+  createdAt  DateTime @default(now())
+
+  @@map("user")
+}
