@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import eventRoutes from "./Routes/eventRoute.js";
 import categoryRoutes from "./Routes/categoryRoute.js";
 import pembicaraRoutes from "./Routes/pembicaraRoute.js";
+import userRoutes from "./Routes/userRoute.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 app.use("/events", eventRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/pembicara", pembicaraRoutes);
+app.use("/", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server berjalan di port ${PORT}`);

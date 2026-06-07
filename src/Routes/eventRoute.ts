@@ -1,4 +1,5 @@
 import express from "express";
+import { authenticate } from "../Middlewares/authMiddleware.js";
 
 import {
   getAllEvents,
@@ -17,12 +18,12 @@ router.get("/", getAllEvents);
 router.get("/:id", getEventById);
 
 // CREATE
-router.post("/", createEvent);
+router.post("/", authenticate, createEvent);
 
 // UPDATE
-router.put("/:id", updateEvent);
+router.put("/:id", authenticate, updateEvent);
 
 // DELETE
-router.delete("/:id", deleteEvent);
+router.delete("/:id", authenticate, deleteEvent);
 
 export default router;
