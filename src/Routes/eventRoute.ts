@@ -1,5 +1,5 @@
 import express from "express";
-import { authenticate } from "../Middlewares/authMiddleware.js";
+import { authenticate } from "../middlewares/authMiddleware.js";
 
 import {
   getAllEvents,
